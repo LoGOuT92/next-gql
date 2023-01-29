@@ -1,10 +1,19 @@
 import Layout from "@/Components/Layout";
 import { NextPage } from "next";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
+import gql from "graphql-tag";
 import * as React from "react";
 import NextLink from "next/link";
 
-interface IProfileProps {}
+interface getSingleCountry {
+  country: {
+    code: string;
+    name: string;
+  };
+}
+interface getSingleCountryVars {
+  ID: string;
+}
 
 const COUNTRY_CODE = "PL";
 
@@ -18,7 +27,10 @@ const GET_COUNTRY = gql`
 `;
 
 function Profile({ ID }: { ID: string }) {
-  const { loading, error, data } = useQuery(GET_COUNTRY, {
+  const { loading, error, data } = useQuery<
+    getSingleCountry,
+    getSingleCountryVars
+  >(GET_COUNTRY, {
     variables: { ID: COUNTRY_CODE },
   });
 
@@ -45,8 +57,8 @@ function Profile({ ID }: { ID: string }) {
             cursor: "pointer",
           }}
         >
-          <span>{data.country.code}</span>
-          <span>{data.country.name}</span>
+          <span>{data?.country?.code}</span>
+          <span>{data?.country?.name}</span>
         </label>
       </NextLink>
     </Layout>
