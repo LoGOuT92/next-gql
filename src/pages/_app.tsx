@@ -2,8 +2,10 @@ import "@/styles/globals.css";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import type { AppProps } from "next/app";
 
+const URL = "https://countries.trevorblades.com/";
+
 const client = new ApolloClient({
-  uri: "https://countries.trevorblades.com/",
+  uri: URL,
   cache: new InMemoryCache(),
   resolvers: {},
 });
