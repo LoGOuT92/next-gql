@@ -1,0 +1,11 @@
+
+query getSingleCountry($ID:ID!){
+	 country(code:$ID){
+    name
+    code
+    emoji
+    languages{
+      name
+    }
+  }
+}
