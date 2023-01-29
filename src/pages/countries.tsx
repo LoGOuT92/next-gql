@@ -1,15 +1,39 @@
-import * as React from "react";
+import { useState, useEffect } from "react";
 import { useGetCountriesQuery } from "types-and-hooks";
 import NextLink from "next/link";
 import Layout from "@/Components/Layout";
+import { graphRequestFetcher } from "./graphRequestFetcher";
 
-interface ICountriesProps {}
+interface ICountriesProps {
+  __typename?: "Country" | undefined;
+  code: string;
+  name: string;
+}
+[];
 
 const Countries: React.FunctionComponent<ICountriesProps> = (props) => {
-  const { data, loading, error } = useGetCountriesQuery();
+  const [countries, setCountries] = useState<ICountriesProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string>("");
+  // const { data, loading, error } = useGetCountriesQuery();
+
+  const fetchCountries = async () => {
+    try {
+      const sdk = await graphRequestFetcher();
+      const { data } = await sdk.getCountries();
+      setCountries(data.countries);
+    } catch (error: any) {
+      console.error(JSON.stringify(error, undefined, 2));
+      setError(JSON.stringify(error.message));
+    }
+    setLoading(false);
+  };
+  useEffect(() => {
+    fetchCountries();
+  }, []);
 
   if (loading) return <Layout>Loading...</Layout>;
-  if (error) return <Layout>Error! ${error.message}</Layout>;
+  if (error) return <Layout>Error! {error}</Layout>;
   return (
     <Layout>
       <div
@@ -21,7 +45,7 @@ const Countries: React.FunctionComponent<ICountriesProps> = (props) => {
           justifyContent: "center",
         }}
       >
-        {data?.countries?.map((country) => (
+        {countries.map((country) => (
           <NextLink
             href="/countries/[code]"
             as={`/countries/${country.code}`}
