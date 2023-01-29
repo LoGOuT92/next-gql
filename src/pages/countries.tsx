@@ -21,14 +21,14 @@ const Countries: React.FunctionComponent<ICountriesProps> = (props) => {
           justifyContent: "center",
         }}
       >
-        {data?.countries?.map((x) => (
+        {data?.countries?.map((country) => (
           <NextLink
             href="/countries/[code]"
-            as={`/countries/${x.code}`}
-            key={x.code}
+            as={`/countries/${country.code}`}
+            key={country.code}
           >
             <div
-              key={x.code}
+              key={country.code}
               style={{
                 display: "flex",
                 width: "250px",
@@ -41,8 +41,8 @@ const Countries: React.FunctionComponent<ICountriesProps> = (props) => {
                 borderRadius: "10px",
               }}
             >
-              <span>{x.code}</span>
-              <span>{x.name}</span>
+              <span>{country.code}</span>
+              <span>{country.name}</span>
             </div>
           </NextLink>
         ))}
