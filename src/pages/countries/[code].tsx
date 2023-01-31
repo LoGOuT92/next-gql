@@ -22,7 +22,7 @@ const Country: NextPage<{ code: string }> = ({ code }) => {
       setData(data);
     } catch (error: any) {
       console.error(JSON.stringify(error, undefined, 2));
-      setError(JSON.stringify(error.message));
+      setError(error.message);
     }
     setLoading(false);
   };

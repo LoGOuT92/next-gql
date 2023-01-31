@@ -24,7 +24,7 @@ const Countries: React.FunctionComponent<ICountriesProps> = (props) => {
       setCountries(data.countries);
     } catch (error: any) {
       console.error(JSON.stringify(error, undefined, 2));
-      setError(JSON.stringify(error.message));
+      setError(error.message);
     }
     setLoading(false);
   };
