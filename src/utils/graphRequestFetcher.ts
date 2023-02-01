@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 import { getSdk } from "path/to/file";
-import {URL} from './_app';
+import {URL} from '../pages/_app';
 
 
 export const graphRequestFetcher = async () => {
