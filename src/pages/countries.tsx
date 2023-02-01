@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useGetCountriesQuery } from "types-and-hooks";
 import NextLink from "next/link";
 import Layout from "@/Components/Layout";
-import { graphRequestFetcher } from "./graphRequestFetcher";
+import { graphRequestFetcher } from "../utils/graphRequestFetcher";
 
 interface ICountriesProps {
   __typename?: "Country" | undefined;

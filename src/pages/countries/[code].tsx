@@ -2,7 +2,7 @@ import Layout from "@/Components/Layout";
 import { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { GetSingleCountryQuery } from "types-and-hooks";
-import { graphRequestFetcher } from "../graphRequestFetcher";
+import { graphRequestFetcher } from "../../utils/graphRequestFetcher";
 
 interface ICountryProps {}
 
